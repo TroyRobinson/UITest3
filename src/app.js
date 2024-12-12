@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 import '../public/globals.css'
-import { Box, Button, Flex, Input, Label } from 'rebass'
+import { Button, Input, Label, Box } from '@shadcn/ui'
 
 export var App = () => {
   const [todos, setTodos] = useState([])
@@ -17,7 +17,7 @@ export var App = () => {
   }
 
   return (
-    <Flex
+    <Box
       width={[1, 1 / 2, 1 / 3]}
       p={3}
       bg="lightgray"
@@ -38,7 +38,7 @@ export var App = () => {
       </Box>
       <Box as="ul" p={0} mt={3} width="100%">
         {todos.map((todo, index) => (
-          <Flex
+          <Box
             as="li"
             key={index}
             alignItems="center"
@@ -52,9 +52,9 @@ export var App = () => {
             <Button onClick={() => removeTodo(index)} bg="red">
               Remove
             </Button>
-          </Flex>
+          </Box>
         ))}
       </Box>
-    </Flex>
+    </Box>
   )
 }
