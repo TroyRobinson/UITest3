@@ -10,26 +10,25 @@ body, #canvas-container * {
     src: local(ITC Garamond ) format('ttf');
   }
 
-
 .appheadercontainer, .listcardcontainer, .gridcardcontainer {
     container-type: inline-size;
 }
 
-@container (min-width: 700px) {
+@media screen and (min-width: 700px) {
     .apptitle {
         font-size: 3.5em;
     }
 
     .listcard {
-        height: 180px
+        height: 180px;
     }   
     .gridcard {
-        height: 325px
+        height: 325px;
     }   
 }
 
-@container (max-width: 700px) {
+@media screen and (max-width: 700px) {
     .gridcard {
-        height: 215px
+        height: 215px;
     }   
 }

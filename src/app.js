@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 import '../public/globals.css'
-import { Grommet, Box, Button, Form, FormField, TextInput } from 'grommet'
+import { Box, Button, Flex, Input, Label } from 'rebass'
 
 export var App = () => {
   const [todos, setTodos] = useState([])
@@ -17,47 +17,44 @@ export var App = () => {
   }
 
   return (
-    <Grommet>
-      <Box
-        width="medium"
-        pad="medium"
-        background="light-1"
-        align="center"
-        justify="center"
-      >
-        <Form
-          onSubmit={({ value }) => addTodo(value.todo)}
-        >
-          <FormField name="todo" htmlFor="todo" label="Todo">
-            <TextInput id="todo" name="todo" placeholder="Add a new todo" />
-          </FormField>
-          <Box direction="row" gap="medium" justify="between">
-            <Button type="submit" primary label="Add Todo" />
-          </Box>
-        </Form>
-        <Box as="ul" pad="none" margin={{ top: 'medium' }}>
-          {todos.map((todo, index) => (
-            <Box
-              as="li"
-              key={index}
-              direction="row"
-              align="center"
-              justify="between"
-              pad="small"
-              background="light-2"
-              margin={{ bottom: 'small' }}
-              round="small"
-            >
-              {todo}
-              <Button
-                label="Remove"
-                onClick={() => removeTodo(index)}
-                color="status-critical"
-              />
-            </Box>
-          ))}
-        </Box>
+    <Flex
+      width={[1, 1 / 2, 1 / 3]}
+      p={3}
+      bg="lightgray"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+    >
+      <Box as="form" onSubmit={(e) => {
+        e.preventDefault()
+        const form = e.target
+        const input = form.elements.todo
+        addTodo(input.value)
+        form.reset()
+      }}>
+        <Label htmlFor="todo">Todo</Label>
+        <Input id="todo" name="todo" placeholder="Add a new todo" />
+        <Button type="submit" mt={2}>Add Todo</Button>
       </Box>
-    </Grommet>
+      <Box as="ul" p={0} mt={3} width="100%">
+        {todos.map((todo, index) => (
+          <Flex
+            as="li"
+            key={index}
+            alignItems="center"
+            justifyContent="space-between"
+            p={2}
+            bg="lightgray"
+            mb={2}
+            sx={{ borderRadius: 4 }}
+          >
+            {todo}
+            <Button onClick={() => removeTodo(index)} bg="red">
+              Remove
+            </Button>
+          </Flex>
+        ))}
+      </Box>
+    </Flex>
   )
 }
